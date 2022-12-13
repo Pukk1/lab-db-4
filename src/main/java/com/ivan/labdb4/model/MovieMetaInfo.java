@@ -15,6 +15,4 @@ public class MovieMetaInfo {
     private Movie movie;
     private String country;
     private String description;
-//    @ManyToMany(mappedBy = "movieMetaInfos", fetch = FetchType.EAGER)
-//    private List<Director> movieMetaInfos;
 }
