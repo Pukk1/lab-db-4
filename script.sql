@@ -23,7 +23,7 @@ CREATE TABLE movie (
                        id serial PRIMARY KEY,
                        name varchar(255) NOT NULL,
                        genre varchar(255) NOT NULL,
-                       rating numeric DEFAULT 0.0,
+                       rating float4 DEFAULT 0.0,
                        age_rating int DEFAULT 0
                            CHECK(rating >= 0.0 AND rating <= 100.0)
 );
@@ -49,7 +49,7 @@ CREATE TABLE person (
                         name varchar(255) NOT NULL,
                         surname varchar(255) NOT NULL,
                         patronymic varchar(255),
-                        birthdate date NOT NULL,
+                        birthdate timestamp(6) NOT NULL,
                         gender GENDER NOT NULL
 );
 

@@ -9,7 +9,7 @@ public class MovieMetaInfo {
     @Id
     private Long id;
     @OneToOne(targetEntity = Movie.class, fetch = FetchType.EAGER, optional = false)
-    @JoinColumn(name = "file_id", referencedColumnName = "id")
+    @JoinColumn(name = "film_id", referencedColumnName = "id")
     private Movie movie;
     private String country;
     private String description;

@@ -1,9 +1,6 @@
 package com.ivan.labdb4.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Inheritance;
-import jakarta.persistence.InheritanceType;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -27,5 +24,6 @@ public class Person {
 
     private Date birthdate;
 
+    @Enumerated(value = EnumType.STRING)
     private Gender gender;
 }
