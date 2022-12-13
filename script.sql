@@ -50,7 +50,7 @@ CREATE TABLE person (
                         surname varchar(255) NOT NULL,
                         patronymic varchar(255),
                         birthdate timestamp(6) NOT NULL,
-                        gender GENDER NOT NULL
+                        gender varchar(255) NOT NULL
 );
 
 CREATE TABLE director (
