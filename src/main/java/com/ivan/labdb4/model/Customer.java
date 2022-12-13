@@ -2,12 +2,15 @@ package com.ivan.labdb4.model;
 
 import com.ivan.labdb4.model.security.CustomerRole;
 import com.ivan.labdb4.model.security.CustomerStatus;
+
 import javax.persistence.*;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
+import java.util.Date;
 import java.util.Set;
 
 

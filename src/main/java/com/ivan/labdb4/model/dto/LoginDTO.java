@@ -3,7 +3,7 @@ package com.ivan.labdb4.model.dto;
 import lombok.Data;
 
 @Data
-public class AuthRequest {
+public class LoginDTO {
     private String username;
     private String password;
 }
