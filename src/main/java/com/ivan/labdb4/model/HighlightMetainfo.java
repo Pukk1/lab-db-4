@@ -9,6 +9,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class HighlightMetainfo {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private Integer duration;
     @OneToOne(targetEntity = Highlight.class, fetch = FetchType.EAGER, optional = false)

@@ -10,6 +10,7 @@ import lombok.NoArgsConstructor;
 public class Highlight {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @OneToOne(targetEntity = HighlightAuthor.class, fetch = FetchType.EAGER, optional = false)
     @JoinColumn(name = "author_id", referencedColumnName = "id")

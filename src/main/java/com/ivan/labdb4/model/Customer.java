@@ -1,12 +1,12 @@
 package com.ivan.labdb4.model;
 
-import jakarta.persistence.*;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Inheritance;
+import jakarta.persistence.InheritanceType;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
-
-import java.util.List;
 
 
 @EqualsAndHashCode(callSuper = true)
@@ -16,8 +16,9 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Customer extends Person {
-    private String login;
     private String email;
+    private String login;
+    private String password;
 
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
