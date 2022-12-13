@@ -144,9 +144,9 @@ CREATE OR REPLACE FUNCTION set_movie_meta_info_description_default()
 RETURNS TRIGGER AS $$
 BEGIN
 UPDATE movie_meta_info
-SET disctiption = 'Discription for this film not exist'
+SET description = 'Discription for this film not exist'
 WHERE movie_meta_info.id = NEW.id
-  and (NEW.disctiption is NULL OR NEW.disctiption = '');
+  and (NEW.description is NULL OR NEW.description = '');
 RETURN NEW;
 END;
 $$ LANGUAGE plpgsql;
