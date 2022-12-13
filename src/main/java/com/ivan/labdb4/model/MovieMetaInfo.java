@@ -3,6 +3,8 @@ package com.ivan.labdb4.model;
 import jakarta.persistence.*;
 import lombok.Data;
 
+import java.util.List;
+
 @Entity
 @Data
 public class MovieMetaInfo {
@@ -13,4 +15,6 @@ public class MovieMetaInfo {
     private Movie movie;
     private String country;
     private String description;
+    @ManyToMany(mappedBy = "movieMetaInfos", fetch = FetchType.EAGER)
+    private List<Director> movieMetaInfos;
 }
