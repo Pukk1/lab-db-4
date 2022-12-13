@@ -16,4 +16,7 @@ public class HighlightMetainfo {
     @OneToOne(targetEntity = Movie.class, fetch = FetchType.EAGER, optional = false)
     @JoinColumn(name = "movie_id", referencedColumnName = "id")
     private Movie movie;
+
+    @Lob
+    private byte[] data;
 }
