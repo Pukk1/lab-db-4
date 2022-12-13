@@ -4,7 +4,7 @@ import lombok.Data;
 
 @Data
 public class MovieMetaInfoDto {
-    private Long id;
+    private Integer id;
     private MovieDto movie;
     private String country;
     private String description;

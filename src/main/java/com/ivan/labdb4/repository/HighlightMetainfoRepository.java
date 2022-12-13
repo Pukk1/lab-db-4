@@ -8,8 +8,8 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface HighlightMetainfoRepository extends JpaRepository<HighlightMetainfo, Long> {
+public interface HighlightMetainfoRepository extends JpaRepository<HighlightMetainfo, Integer> {
 
     @Query(nativeQuery = true, value = "SELECT id from highlight_metainfo")
-    List<Long> getAllHighLightsIds();
+    List<Integer> getAllHighLightsIds();
 }

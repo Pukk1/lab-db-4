@@ -31,7 +31,7 @@ public class HighLightServiceImpl implements HighLightService {
     }
 
     @Override
-    public HighlightMetainfo getHighlightMetainfo(Long id) {
+    public HighlightMetainfo getHighlightMetainfo(Integer id) {
         if (!highlightMetainfoRepository.findById(id).isPresent()) {
             throw new RuntimeException("Video not found!");
         }
@@ -40,7 +40,7 @@ public class HighLightServiceImpl implements HighLightService {
     }
 
     @Override
-    public void saveHighlightMetainfo(MultipartFile file, Long id) throws IOException {
+    public void saveHighlightMetainfo(MultipartFile file, Integer id) throws IOException {
         if (highlightMetainfoRepository.findById(id).isPresent()) {
             throw new RuntimeException("Video already exists!");
         }
@@ -75,7 +75,7 @@ public class HighLightServiceImpl implements HighLightService {
     }
 
     @Override
-    public List<Long> getAllHighLightsIds() {
+    public List<Integer> getAllHighLightsIds() {
         return highlightMetainfoRepository.getAllHighLightsIds();
     }
 }

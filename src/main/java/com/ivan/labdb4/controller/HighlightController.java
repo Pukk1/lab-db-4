@@ -24,7 +24,7 @@ public class HighlightController {
 
     @PostMapping()
     public ResponseEntity<String> saveHighLight(@RequestParam("file") MultipartFile file,
-                                                @RequestParam("id") Long id) {
+                                                @RequestParam("id") Integer id) {
         try {
             highLightService.saveHighlightMetainfo(file, id);
             return ResponseEntity.ok("Video saved");
@@ -34,7 +34,7 @@ public class HighlightController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Resource> getHighLightById(@PathVariable Long id) {
+    public ResponseEntity<Resource> getHighLightById(@PathVariable Integer id) {
 
         return ResponseEntity
                 .status(HttpStatus.OK)
@@ -43,7 +43,7 @@ public class HighlightController {
     }
 
     @GetMapping("/all")
-    public ResponseEntity<List<Long>> getAllHighLightsIds() {
+    public ResponseEntity<List<Integer>> getAllHighLightsIds() {
         return ResponseEntity.ok(highLightService.getAllHighLightsIds());
     }
 }

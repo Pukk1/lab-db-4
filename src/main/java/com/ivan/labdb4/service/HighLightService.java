@@ -8,9 +8,9 @@ import java.util.List;
 
 public interface HighLightService {
 
-    HighlightMetainfo getHighlightMetainfo(Long id);
+    HighlightMetainfo getHighlightMetainfo(Integer id);
 
-    void saveHighlightMetainfo(MultipartFile file, Long id) throws IOException;
+    void saveHighlightMetainfo(MultipartFile file, Integer id) throws IOException;
 
-    List<Long> getAllHighLightsIds();
+    List<Integer> getAllHighLightsIds();
 }

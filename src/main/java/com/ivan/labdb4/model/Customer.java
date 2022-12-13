@@ -2,13 +2,13 @@ package com.ivan.labdb4.model;
 
 import com.ivan.labdb4.model.security.CustomerRole;
 import com.ivan.labdb4.model.security.CustomerStatus;
-import jakarta.persistence.*;
+import javax.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
-import java.util.List;
+import java.util.Set;
 
 
 @EqualsAndHashCode(callSuper = true)
@@ -35,7 +35,7 @@ public class Customer extends Person {
             joinColumns = @JoinColumn(name = "customer_id"),
             inverseJoinColumns = @JoinColumn(name = "highlight_metainfo_id")
     )
-    private List<HighlightMetainfo> liked;
+    private Set<HighlightMetainfo> liked;
 
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
@@ -43,5 +43,5 @@ public class Customer extends Person {
             joinColumns = @JoinColumn(name = "customer_id"),
             inverseJoinColumns = @JoinColumn(name = "highlight_author_id")
     )
-    private List<HighlightAuthor> subscriptions;
+    private Set<HighlightAuthor> subscriptions;
 }

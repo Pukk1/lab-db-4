@@ -1,14 +1,13 @@
 package com.ivan.labdb4.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
+import javax.persistence.*;
 import lombok.Data;
 
 @Entity
 @Data
 public class Preview {
     @Id
-    private Long id;
+    private Integer id;
     private Integer height;
     private Integer width;
     private String tag;

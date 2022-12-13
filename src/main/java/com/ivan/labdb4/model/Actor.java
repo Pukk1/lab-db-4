@@ -1,12 +1,13 @@
 package com.ivan.labdb4.model;
 
-import jakarta.persistence.*;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
-import java.util.List;
+import javax.persistence.*;
+import java.util.Set;
 
 @EqualsAndHashCode(callSuper = true)
 @Entity
@@ -20,5 +21,5 @@ public class Actor extends Person {
             joinColumns = @JoinColumn(name = "actor_id"),
             inverseJoinColumns = @JoinColumn(name = "movie_meta_info_id")
     )
-    List<MovieMetaInfo> movieMetaInfos;
+    Set<MovieMetaInfo> movieMetaInfos;
 }

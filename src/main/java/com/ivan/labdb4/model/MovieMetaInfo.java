@@ -1,6 +1,6 @@
 package com.ivan.labdb4.model;
 
-import jakarta.persistence.*;
+import javax.persistence.*;
 import lombok.Data;
 
 import java.util.List;
@@ -9,7 +9,7 @@ import java.util.List;
 @Data
 public class MovieMetaInfo {
     @Id
-    private Long id;
+    private Integer id;
     @OneToOne(targetEntity = Movie.class, fetch = FetchType.EAGER, optional = false)
     @JoinColumn(name = "film_id", referencedColumnName = "id")
     private Movie movie;

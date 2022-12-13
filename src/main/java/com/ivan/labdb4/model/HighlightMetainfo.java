@@ -1,6 +1,6 @@
 package com.ivan.labdb4.model;
 
-import jakarta.persistence.*;
+import javax.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 public class HighlightMetainfo {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Integer id;
     private Integer duration;
     @OneToOne(targetEntity = Highlight.class, fetch = FetchType.EAGER, optional = false)
     @JoinColumn(name = "highlight_id", referencedColumnName = "id")
