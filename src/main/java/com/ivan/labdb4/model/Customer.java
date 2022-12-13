@@ -26,4 +26,12 @@ public class Customer extends Person {
             inverseJoinColumns = @JoinColumn(name = "highlight_metainfo_id")
     )
     private List<HighlightMetainfo> highlightMetainfos;
+
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(
+            name = "subscribers",
+            joinColumns = @JoinColumn(name = "customer_id"),
+            inverseJoinColumns = @JoinColumn(name = "highlight_author_id")
+    )
+    private List<HighlightAuthor> highlightAuthors;
 }
