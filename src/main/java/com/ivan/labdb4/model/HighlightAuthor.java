@@ -5,6 +5,6 @@ import lombok.Data;
 
 @Entity
 @Data
-public class HightlightAuthor extends Customer {
+public class HighlightAuthor extends Customer {
     private String nickname;
 }

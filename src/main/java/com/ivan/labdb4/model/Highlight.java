@@ -9,8 +9,8 @@ public class Highlight {
 
     @Id
     private Long id;
-    @OneToOne(targetEntity = HightlightAuthor.class, fetch = FetchType.EAGER, optional = false)
+    @OneToOne(targetEntity = HighlightAuthor.class, fetch = FetchType.EAGER, optional = false)
     @JoinColumn(name = "author_id", referencedColumnName = "id")
-    private HightlightAuthor author;
+    private HighlightAuthor author;
 //    private String fileLink;
 }

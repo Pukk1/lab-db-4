@@ -22,7 +22,7 @@ CREATE TYPE GENDER AS ENUM (
 CREATE TABLE movie (
                        id serial PRIMARY KEY,
                        name varchar(255) NOT NULL,
-                       ganre varchar(255) NOT NULL,
+                       genre varchar(255) NOT NULL,
                        rating numeric DEFAULT 0.0,
                        age_rating int DEFAULT 0
                            CHECK(rating >= 0.0 AND rating <= 100.0)
@@ -32,7 +32,7 @@ CREATE TABLE movie_meta_info (
                                  id serial PRIMARY KEY,
                                  film_id int UNIQUE NOT NULL REFERENCES movie ON DELETE CASCADE,
                                  country varchar(255) DEFAULT 'International',
-                                 disctiption text
+                                 description text
 );
 
 CREATE TABLE preview (
@@ -94,6 +94,7 @@ CREATE TABLE highlight (
 CREATE TABLE highlight_metainfo (
                                     id serial PRIMARY KEY,
                                     duration int NOT NULL,
+                                    data oid NOT NULL,
                                     highlight_id int UNIQUE NOT NULL REFERENCES highlight ON DELETE CASCADE,
                                     movie_id int NOT NULL REFERENCES movie ON DELETE CASCADE
 );
@@ -114,7 +115,7 @@ CREATE INDEX film_id_index_movie_meta_info
     ON movie_meta_info(film_id);
 
 CREATE INDEX ganre_index_movie
-    ON movie(ganre);
+    ON movie(genre);
 
 CREATE INDEX login_index_customer
     ON customer(login);
