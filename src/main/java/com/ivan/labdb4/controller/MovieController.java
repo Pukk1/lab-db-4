@@ -5,12 +5,14 @@ import com.ivan.labdb4.model.dto.MovieMetaInfoDto;
 import com.ivan.labdb4.service.MovieService;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
 
-@RestController
+//@RestController
+@Controller
 @RequestMapping("/api/v1/movie")
 @RequiredArgsConstructor
 public class MovieController {
@@ -19,7 +21,8 @@ public class MovieController {
     private final MovieService service;
 
     @GetMapping("/info/{id}")
-    public MovieMetaInfoDto getMovieInfo(@PathVariable("id") MovieMetaInfo info) {
-        return mapper.map(info, MovieMetaInfoDto.class);
+    public String getMovieInfo(@PathVariable("id") MovieMetaInfo info, Model model) {
+        model.addAttribute("movieInfo", mapper.map(info, MovieMetaInfoDto.class));
+        return "movie-info";
     }
 }

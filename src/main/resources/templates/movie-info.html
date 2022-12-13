@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Movie-info</title>
+</head>
+<body>
+<p><strong><th:block th:text="${movieInfo.movie.name}"/></strong></p>
+<table border="1" style="border-collapse: collapse; width: 68.1999%; height: 147px;" height="141">
+    <tbody>
+    <tr style="height: 63px;">
+        <td style="width: 23.3728%; height: 63px;">Страна создания:</td>
+        <td style="width: 104.073%; height: 63px;"><th:block th:text="${movieInfo.country}"/></td>
+    </tr>
+    <tr style="height: 33px;">
+        <td style="width: 23.3728%; height: 33px;">Жанр:</td>
+        <td style="width: 104.073%; height: 33px;"><th:block th:text="${movieInfo.movie.genre}"/></td>
+    </tr>
+    <tr style="height: 18px;">
+        <td style="width: 23.3728%; height: 18px;">Возрастной рейтинг:</td>
+        <td style="width: 104.073%; height: 18px;"><th:block th:text="${movieInfo.movie.ageRating}"/></td>
+    </tr>
+    <tr style="height: 33px;">
+        <td style="width: 23.3728%; height: 33px;">Рейтинг:</td>
+        <td style="width: 104.073%; height: 33px;"><th:block th:text="${movieInfo.movie.rating}"/></td>
+    </tr>
+    </tbody>
+</table>
+<p>Краткое описание фильма:</p>
+<p><th:block th:text="${movieInfo.description}"/></p>
+</body>
+</html>
