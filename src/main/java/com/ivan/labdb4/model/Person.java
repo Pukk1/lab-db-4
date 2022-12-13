@@ -25,6 +25,6 @@ public class Person {
 
     private Date birthdate;
 
-    @Enumerated(value = EnumType.STRING)
+    @Enumerated(EnumType.STRING)
     private Gender gender;
 }

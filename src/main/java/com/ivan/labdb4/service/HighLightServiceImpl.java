@@ -10,6 +10,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.util.Date;
+import java.util.List;
 
 @Service
 public class HighLightServiceImpl implements HighLightService {
@@ -58,9 +59,9 @@ public class HighLightServiceImpl implements HighLightService {
         highlightAuthorRepository.save(highlightAuthor);
 
 
-        Highlight highlight = new Highlight();
-        highlight.setAuthor(highlightAuthor);
+        Highlight highlight = new Highlight(highlightAuthor, "TestName");
         highlightRepository.save(highlight);
+
 
         Movie movie = new Movie();
         movie.setName("Test");
@@ -68,7 +69,13 @@ public class HighLightServiceImpl implements HighLightService {
         movieRepository.save(movie);
 
 
-        HighlightMetainfo highlightMetainfo = new HighlightMetainfo(highlight, movie);
+        HighlightMetainfo highlightMetainfo = new HighlightMetainfo(highlight, movie, 10);
+        highlightMetainfo.setData(file.getBytes());
         highlightMetainfoRepository.save(highlightMetainfo);
+    }
+
+    @Override
+    public List<Long> getAllHighLightsIds() {
+        return highlightMetainfoRepository.getAllHighLightsIds();
     }
 }

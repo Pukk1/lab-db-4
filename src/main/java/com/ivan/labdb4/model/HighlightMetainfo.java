@@ -23,8 +23,9 @@ public class HighlightMetainfo {
     @Lob
     private byte[] data;
 
-    public HighlightMetainfo(Highlight highlight, Movie movie) {
+    public HighlightMetainfo(Highlight highlight, Movie movie, Integer duration) {
         this.highlight = highlight;
         this.movie = movie;
+        this.duration = duration;
     }
 }

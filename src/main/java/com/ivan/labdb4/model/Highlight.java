@@ -15,8 +15,10 @@ public class Highlight {
     @OneToOne(targetEntity = HighlightAuthor.class, fetch = FetchType.EAGER, optional = false)
     @JoinColumn(name = "author_id", referencedColumnName = "id")
     private HighlightAuthor author;
+    private String name;
 
-    public Highlight(HighlightAuthor author) {
+    public Highlight(HighlightAuthor author, String name) {
         this.author = author;
+        this.name = name;
     }
 }

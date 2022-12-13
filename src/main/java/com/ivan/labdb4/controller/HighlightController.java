@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.util.List;
 
 @RestController
 @RequestMapping("api/v1/video")
@@ -39,5 +40,10 @@ public class HighlightController {
                 .status(HttpStatus.OK)
                 .contentType(MediaType.APPLICATION_OCTET_STREAM)
                 .body(new ByteArrayResource(highLightService.getHighlightMetainfo(id).getData()));
+    }
+
+    @GetMapping("all")
+    public ResponseEntity<List<Long>> getAllHighLightsIds() {
+        return ResponseEntity.ok(highLightService.getAllHighLightsIds());
     }
 }
