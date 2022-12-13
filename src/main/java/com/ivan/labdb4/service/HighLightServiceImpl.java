@@ -1,6 +1,9 @@
 package com.ivan.labdb4.service;
 
+import com.ivan.labdb4.model.Highlight;
 import com.ivan.labdb4.model.HighlightMetainfo;
+import com.ivan.labdb4.model.HighlightAuthor;
+import com.ivan.labdb4.model.Movie;
 import com.ivan.labdb4.repository.HighlightMetainfoRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -31,7 +34,7 @@ public class HighLightServiceImpl implements HighLightService {
             throw new RuntimeException("Video already exists!");
         }
 
-        HighlightMetainfo highlightMetainfo = new HighlightMetainfo();
-//        highlightMetainfo.se
+        HighlightMetainfo highlightMetainfo = new HighlightMetainfo(new Highlight(new HighlightAuthor()), new Movie());
+        highlightMetainfoRepository.save(highlightMetainfo);
     }
 }

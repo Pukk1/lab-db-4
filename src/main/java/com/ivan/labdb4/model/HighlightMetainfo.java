@@ -2,9 +2,11 @@ package com.ivan.labdb4.model;
 
 import jakarta.persistence.*;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Entity
 @Data
+@NoArgsConstructor
 public class HighlightMetainfo {
     @Id
     private Long id;
@@ -19,4 +21,9 @@ public class HighlightMetainfo {
 
     @Lob
     private byte[] data;
+
+    public HighlightMetainfo(Highlight highlight, Movie movie) {
+        this.highlight = highlight;
+        this.movie = movie;
+    }
 }
