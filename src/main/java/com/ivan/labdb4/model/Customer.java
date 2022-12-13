@@ -1,5 +1,7 @@
 package com.ivan.labdb4.model;
 
+import com.ivan.labdb4.model.security.CustomerRole;
+import com.ivan.labdb4.model.security.CustomerStatus;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -17,8 +19,15 @@ import java.util.List;
 @NoArgsConstructor
 public class Customer extends Person {
     private String email;
-    private String login;
+    @Column(name = "login")
+    private String username;
     private String password;
+
+    @Enumerated(EnumType.STRING)
+    private CustomerRole role;
+
+    @Enumerated(EnumType.STRING)
+    private CustomerStatus status;
 
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(

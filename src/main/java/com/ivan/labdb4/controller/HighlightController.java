@@ -13,7 +13,7 @@ import java.io.IOException;
 import java.util.List;
 
 @RestController
-@RequestMapping("api/v1/video")
+@RequestMapping("/api/v1/video")
 public class HighlightController {
 
     private final HighLightService highLightService;
@@ -33,7 +33,7 @@ public class HighlightController {
         }
     }
 
-    @GetMapping("{id}")
+    @GetMapping("/{id}")
     public ResponseEntity<Resource> getHighLightById(@PathVariable Long id) {
 
         return ResponseEntity
@@ -42,7 +42,7 @@ public class HighlightController {
                 .body(new ByteArrayResource(highLightService.getHighlightMetainfo(id).getData()));
     }
 
-    @GetMapping("all")
+    @GetMapping("/all")
     public ResponseEntity<List<Long>> getAllHighLightsIds() {
         return ResponseEntity.ok(highLightService.getAllHighLightsIds());
     }

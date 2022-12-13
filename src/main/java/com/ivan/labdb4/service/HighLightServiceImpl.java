@@ -49,7 +49,7 @@ public class HighLightServiceImpl implements HighLightService {
         highlightAuthor.setNickname("test");
 
         highlightAuthor.setEmail("TestMail");
-        highlightAuthor.setLogin("TestLogin");
+        highlightAuthor.setUsername("TestLogin");
         highlightAuthor.setPassword("TestPass");
 
         highlightAuthor.setName("TestName");

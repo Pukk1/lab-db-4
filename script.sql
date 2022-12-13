@@ -77,7 +77,9 @@ CREATE TABLE customer (
                           id int PRIMARY KEY REFERENCES person ON DELETE CASCADE,
                           email varchar(255) NOT NULL,
                           login varchar(255) UNIQUE NOT NULL,
-                          password varchar(255) NOT NULL
+                          password varchar(255) NOT NULL,
+                          role varchar(255) NOT NULL,
+                          status varchar(255) NOT NULL
 );
 
 CREATE TABLE highlight_author (
