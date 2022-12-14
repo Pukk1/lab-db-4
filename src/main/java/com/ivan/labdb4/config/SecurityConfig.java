@@ -46,6 +46,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/api/v1/video").hasAuthority(CustomerPermission.HIGHLIGHT_WRITE.getPermission())
                 .antMatchers("/manage/highlights").hasAuthority(CustomerPermission.HIGHLIGHT_WRITE.getPermission())
                 .antMatchers("/api/v1/video/manage/all").hasAuthority(CustomerPermission.HIGHLIGHT_WRITE.getPermission())
+
+                .antMatchers("/movie-info").permitAll()
+                .antMatchers("/like-video/{video-info-id:[\\d+]}").permitAll()
+                .antMatchers("/subscribe").permitAll()
 //                .antMatchers("/api/v1/video/**").permitAll()
 //                .antMatchers("/auth/logout").permitAll()
 //                .antMatchers("/auth/login-request").permitAll()
