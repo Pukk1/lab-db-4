@@ -34,14 +34,14 @@ public class CustomerDetailsServiceImpl implements UserDetailsService {
         return customerRepository.findByUsername(username).orElseThrow(() -> new UsernameNotFoundException("User not found"));
     }
 
-    public boolean saveCustomer(Customer customer) {
+    public boolean saveCustomer(Customer customer, CustomerRole role) {
         Customer supposeCustomer = customerRepository.findByUsername(customer.getUsername()).orElse(null);
 
         if (supposeCustomer != null) {
             return false;
         }
 
-        customer.setRole(CustomerRole.DEFAULT);
+        customer.setRole(role);
         customer.setStatus(CustomerStatus.ACTIVE);
         customer.setPassword(new BCryptPasswordEncoder(12).encode(customer.getPassword()));
         customerRepository.save(customer);

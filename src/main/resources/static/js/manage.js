@@ -28,7 +28,7 @@ fetch('http://localhost:8080/api/v1/video/manage/all?' + new URLSearchParams({to
                 ev.preventDefault();
                 video = ev.target.innerText;
                 if (video) {
-                    videoScreen.src = `http://localhost:8080/api/v1/video/${video}`;
+                    videoScreen.src = `http://localhost:8080/api/v1/video/${video}?` + new URLSearchParams({token: queryParams.token});
                     videoDiv.style.display = 'block';
                     document.querySelector('#now-playing')
                         .innerText = 'Now playing ' + video;

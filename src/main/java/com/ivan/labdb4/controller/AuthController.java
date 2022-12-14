@@ -5,6 +5,7 @@ import com.ivan.labdb4.model.Customer;
 import com.ivan.labdb4.model.Gender;
 import com.ivan.labdb4.model.HighlightAuthor;
 import com.ivan.labdb4.model.dto.CustomerDTO;
+import com.ivan.labdb4.model.security.CustomerRole;
 import com.ivan.labdb4.repository.HighlightAuthorRepository;
 import com.ivan.labdb4.service.CustomerDetailsServiceImpl;
 import org.modelmapper.ModelMapper;
@@ -65,11 +66,14 @@ public class AuthController {
             @RequestParam(required = false) String nickname
     ) throws ParseException {
         Customer customer = mapper.map(new CustomerDTO(email, username, password, name, surname, new SimpleDateFormat("yyyy-MM-dd").parse(birthdate), gender), Customer.class);
-        boolean isAdded = customerDetailsService.saveCustomer(customer);
+        boolean isAdded;
+        if (nickname != null && !nickname.isBlank()) {
+            isAdded = customerDetailsService.saveCustomer(customer, CustomerRole.CREATOR);
+            highlightAuthorRepository.persist(customer.getId(), nickname);
+        } else {
+            isAdded = customerDetailsService.saveCustomer(customer, CustomerRole.DEFAULT);
+        }
         if (isAdded) {
-            if (nickname != null && !nickname.isBlank()) {
-                highlightAuthorRepository.persist(customer.getId(), nickname);
-            }
             return login(username, password);
         } else {
             throw new RuntimeException("Forbidden");

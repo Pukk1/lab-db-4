@@ -1,9 +1,10 @@
 const videoDiv = document.querySelector('#video-player');
 const videoScreen = document.querySelector('#video-screen');
+const queryParams = Object.fromEntries(new URLSearchParams(window.location.search));
 
 let video = "";
 
-fetch('http://localhost:8080/api/v1/video/all')
+fetch('http://localhost:8080/api/v1/video/all?' + new URLSearchParams({token: queryParams.token}))
     .then(result => result.json())
     .then(result => {
 
@@ -36,7 +37,7 @@ fetch('http://localhost:8080/api/v1/video/all')
                 ev.preventDefault();
                 video = ev.target.innerText;
                 if (video) {
-                    videoScreen.src = `http://localhost:8080/api/v1/video/${video}`;
+                    videoScreen.src = `http://localhost:8080/api/v1/video/${video}?` + new URLSearchParams({token: queryParams.token});
                     videoDiv.style.display = 'block';
                     document.querySelector('#now-playing')
                         .innerText = 'Now playing ' + video;

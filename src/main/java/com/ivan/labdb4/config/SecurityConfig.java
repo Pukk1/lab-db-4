@@ -1,6 +1,7 @@
 package com.ivan.labdb4.config;
 
 import com.ivan.labdb4.jwt.JwtConfigurer;
+import com.ivan.labdb4.model.security.CustomerPermission;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -32,10 +33,20 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
                 .authorizeRequests()
-                .antMatchers("/**").permitAll()
+                .antMatchers("/").permitAll()
+                .antMatchers("/static/**").permitAll()
+                .antMatchers("/js/**").permitAll()
                 .antMatchers("/auth/login").permitAll()
                 .antMatchers("/auth/register").permitAll()
-                .antMatchers("/api/v1/video/**").permitAll()
+
+                .antMatchers("/main").hasAuthority(CustomerPermission.HIGHLIGHT_READ.getPermission())
+                .antMatchers("/api/v1/video/{id:[\\d+]}").hasAuthority(CustomerPermission.HIGHLIGHT_READ.getPermission())
+                .antMatchers("/api/v1/video/all").hasAuthority(CustomerPermission.HIGHLIGHT_READ.getPermission())
+
+                .antMatchers("/api/v1/video").hasAuthority(CustomerPermission.HIGHLIGHT_WRITE.getPermission())
+                .antMatchers("/manage/highlights").hasAuthority(CustomerPermission.HIGHLIGHT_WRITE.getPermission())
+                .antMatchers("/api/v1/video/manage/all").hasAuthority(CustomerPermission.HIGHLIGHT_WRITE.getPermission())
+//                .antMatchers("/api/v1/video/**").permitAll()
 //                .antMatchers("/auth/logout").permitAll()
 //                .antMatchers("/auth/login-request").permitAll()
 //                .antMatchers()
