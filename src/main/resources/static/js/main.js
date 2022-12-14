@@ -21,8 +21,8 @@ fetch('http://localhost:8080/api/v1/video/all')
 
                 const token = document.getElementById("token-input");
                 const filmLink = document.createElement('A')
-                filmLink.innerText = 'Информация о фильме'
-                filmLink.href = window.location.origin + '/movie-info/by-highlight/' + vid + '?token=' + token.value
+                filmLink.innerText = 'LIKE'
+                filmLink.href = window.location.origin + '/like-video/' + vid + '?token=' + token.value
                 li.appendChild(filmLink)
 
                 myVids.appendChild(li);

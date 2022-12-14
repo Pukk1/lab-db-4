@@ -1,6 +1,5 @@
 package com.ivan.labdb4.controller;
 
-import com.ivan.labdb4.model.HighlightMetainfo;
 import com.ivan.labdb4.model.MovieMetaInfo;
 import com.ivan.labdb4.model.dto.MovieMetaInfoDto;
 import com.ivan.labdb4.service.MovieService;
@@ -32,11 +31,11 @@ public class MovieController {
         return "movie-info";
     }
 
-    @GetMapping("/by-highlight/{id}")
-    public String getMovieInfo(
-            @PathVariable("id") HighlightMetainfo info,
-            @RequestParam("token") String token
-    ) {
-        return "redirect:/movie-info/" + info.getMovie().getMovieMetaInfo().getId() + "?token=" + token;
-    }
+//    @GetMapping("/by-highlight/{id}")
+//    public String getMovieInfo(
+//            @PathVariable("id") HighlightMetainfo info,
+//            @RequestParam("token") String token
+//    ) {
+//        return "redirect:/movie-info/" + info.getMovie().getMovieMetaInfo().getId() + "?token=" + token;
+//    }
 }

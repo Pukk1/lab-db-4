@@ -2,12 +2,11 @@ package com.ivan.labdb4.controller;
 
 import com.ivan.labdb4.jwt.JwtTokenProvider;
 import com.ivan.labdb4.model.HighlightMetainfo;
+import com.ivan.labdb4.repository.MovieMetaInfoRepository;
 import com.ivan.labdb4.service.CustomerService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 @RequiredArgsConstructor
 @Controller
@@ -15,15 +14,17 @@ import org.springframework.web.bind.annotation.RequestParam;
 public class CustomerController {
 
     private final CustomerService customerService;
+    private final MovieMetaInfoRepository metaInfoRepository;
     private final JwtTokenProvider jwtTokenProvider;
 
-    @PostMapping("/like-video")
+    @GetMapping("/like-video/{video-info-id}")
     public String likeVideo(
-            @RequestParam("video-info-id") HighlightMetainfo videoInfo,
+            @PathVariable("video-info-id") HighlightMetainfo videoInfo,
             @RequestParam("token") String token
     ) {
         customerService.likeVideo(jwtTokenProvider.getUsername(token), videoInfo);
-        return "redirect:/movie-info/" + videoInfo.getMovie().getId() + "&token=" + token;
+        var movieMetaInfoByMovie = metaInfoRepository.findMovieMetaInfoByMovieId(videoInfo.getMovie().getId()).stream().findFirst().orElseThrow(RuntimeException::new);
+        return "redirect:/movie-info/" + movieMetaInfoByMovie.getId() + "?token=" + token;
     }
 
     @PostMapping("/subscribe")
