@@ -10,22 +10,26 @@
 <form action="/auth/login" method="get">
     <button>Разлогиниться</button>
 </form>
+<form action="/manage/highlights" method="get">
+    <input type="hidden" name="token" th:value="${token}">
+    <button>Выложить видео</button>
+</form>
 <input id="token-input" type="hidden" name="token" th:value="${token}">
-    <main>
-        <div id="your-videos">
-            <header>
-                <h3>Your videos</h3>
-            </header>
-            <ul id="Доступные хайлайты:">
-            </ul>
-        </div>
-        <div id="video-player">
-            <header>
-                <h3 id="now-playing"></h3>
-            </header>
-            <video id="video-screen" width="720px" height="480px" controls></video>
-        </div>
-    </main>
-    <script src="/js/main.js"></script>
+<main>
+    <div id="your-videos">
+        <header>
+            <h3>Your videos</h3>
+        </header>
+        <ul id="Доступные хайлайты:">
+        </ul>
+    </div>
+    <div id="video-player">
+        <header>
+            <h3 id="now-playing"></h3>
+        </header>
+        <video id="video-screen" width="720px" height="480px" controls></video>
+    </div>
+</main>
+<script src="/js/main.js"></script>
 </body>
 </html>
