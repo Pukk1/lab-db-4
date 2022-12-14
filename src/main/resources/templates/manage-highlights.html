@@ -21,6 +21,19 @@
             </header>
             <video id="video-screen" width="720px" height="480px" controls></video>
         </div>
+        <form id="video-form" action="/api/v1/video" method="post" enctype="multipart/form-data">
+            <fieldset>
+                <legend>Upload a video</legend>
+                <label for="file">Video File</label>
+                <input id="file" name="file" type="file" accept="application/mp4">
+                <label for="video-name">Video Name</label>
+                <input id="video-name" name="video-name" type="text">
+                <label for="movie-name">Movie Name</label>
+                <input id="movie-name" name="movie-name" type="text">
+                <button type="submit">Save</button>
+                <input type="hidden" name="token" th:value="${token}">
+            </fieldset>
+        </form>
     </main>
     <script src="/js/main.js"></script>
 </body>

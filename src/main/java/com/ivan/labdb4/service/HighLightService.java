@@ -13,5 +13,7 @@ public interface HighLightService {
 
     void saveHighlightMetainfo(MultipartFile file, String videoName, String movieName, HighlightAuthor highlightAuthor) throws IOException;
 
+    List<Integer> getAllHighLightsOfAuthor(HighlightAuthor highlightAuthor);
+
     List<Integer> getAllHighLightsIds();
 }

@@ -31,12 +31,19 @@ public class RouteController {
 
     @GetMapping("/main")
     public String postMainPage(
-            @RequestParam("username") String username,
             @RequestParam("token") String token,
             Model model
     ) {
-        model.addAttribute("username", username);
         model.addAttribute("token", token);
         return "main";
+    }
+
+    @GetMapping("/manage/highlights")
+    public String postManagePage(
+            @RequestParam("token") String token,
+            Model model
+    ) {
+        model.addAttribute("token", token);
+        return "manage-highlights";
     }
 }

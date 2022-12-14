@@ -43,7 +43,7 @@ public class AuthController {
             authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(username, password));
             Customer customer = customerDetailsService.findByUsername(username);
             String token = jwtTokenProvider.createToken(customer.getUsername(), customer.getRole().name());
-            return "redirect:/main?token=" + token+"&username="+username;
+            return "redirect:/main?token=" + token;
         } catch (AuthenticationException e) {
             return "Invalid email/password combination";
         }

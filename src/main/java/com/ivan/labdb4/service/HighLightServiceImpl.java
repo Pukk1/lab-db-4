@@ -1,7 +1,6 @@
 package com.ivan.labdb4.service;
 
 import com.ivan.labdb4.model.*;
-import com.ivan.labdb4.repository.HighlightAuthorRepository;
 import com.ivan.labdb4.repository.HighlightMetainfoRepository;
 import com.ivan.labdb4.repository.HighlightRepository;
 import com.ivan.labdb4.repository.MovieRepository;
@@ -9,7 +8,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
-import java.util.Date;
 import java.util.List;
 
 @Service
@@ -46,6 +44,13 @@ public class HighLightServiceImpl implements HighLightService {
         HighlightMetainfo highlightMetainfo = new HighlightMetainfo(highlight, movie);
         highlightMetainfo.setData(file.getBytes());
         highlightMetainfoRepository.save(highlightMetainfo);
+    }
+
+    @Override
+    public List<Integer> getAllHighLightsOfAuthor(HighlightAuthor highlightAuthor) {
+        var ids =  highlightMetainfoRepository.getAllHighLightsIds();
+//        ids.forEach();
+        return null;
     }
 
     @Override
