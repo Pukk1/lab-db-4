@@ -16,6 +16,15 @@ fetch('http://localhost:8080/api/v1/video/all')
                 link.className = 'video-elem'
                 link.href = window.location.origin + window.location.pathname + '#' + vid;
                 li.appendChild(link);
+
+                li.appendChild(document.createElement("BR"))
+
+                const token = document.getElementById("token-input");
+                const filmLink = document.createElement('A')
+                filmLink.innerText = 'Информация о фильме'
+                filmLink.href = window.location.origin + '/movie-info/by-highlight/' + vid + '?token=' + token.value
+                li.appendChild(filmLink)
+
                 myVids.appendChild(li);
             }
         } else {

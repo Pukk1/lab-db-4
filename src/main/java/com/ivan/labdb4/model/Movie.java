@@ -13,4 +13,7 @@ public class Movie {
     private String genre;
     private Float rating;
     private Integer ageRating;
+
+    @OneToOne(mappedBy = "movie")
+    private MovieMetaInfo movieMetaInfo;
 }
