@@ -7,6 +7,10 @@
     <link rel="stylesheet" href="../static/css/styles.css">
 </head>
 <body>
+<form action="/main" method="get">
+    <input type="hidden" name="token" th:value="${token}">
+    <button>На главную</button>
+</form>
 <form action="/auth/login" method="get">
     <button>Разлогиниться</button>
 </form>
