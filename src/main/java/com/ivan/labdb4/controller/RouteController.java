@@ -29,8 +29,8 @@ public class RouteController {
 
     @PostMapping("/main")
     public String postMainPage(
-            @RequestParam("uid") Integer uid,
-            @RequestHeader("Authorization") String token,
+            @RequestParam("username") Integer uid,
+            @RequestParam("token") String token,
             Model model
     ) {
         model.addAttribute("uid", uid);

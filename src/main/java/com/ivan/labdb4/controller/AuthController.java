@@ -6,8 +6,6 @@ import com.ivan.labdb4.model.Gender;
 import com.ivan.labdb4.model.dto.CustomerDTO;
 import com.ivan.labdb4.service.CustomerDetailsServiceImpl;
 import org.modelmapper.ModelMapper;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.AuthenticationException;
@@ -19,8 +17,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.HashMap;
-import java.util.Map;
 
 @Controller
 @RequestMapping("/auth")
@@ -47,9 +43,8 @@ public class AuthController {
             authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(username, password));
             Customer customer = customerDetailsService.findByUsername(username);
             String token = jwtTokenProvider.createToken(customer.getUsername(), customer.getRole().name());
-            Map<Object, Object> response = new HashMap<>();
-            response.put("username", username);
-            response.put("token", token);
+            model.addAttribute("username", username);
+            model.addAttribute("token", token);
             return "main";
         } catch (AuthenticationException e) {
             return "Invalid email/password combination";
@@ -70,9 +65,7 @@ public class AuthController {
         Customer customer = mapper.map(new CustomerDTO(email, username, password, name, surname, new SimpleDateFormat("yyyy-MM-dd").parse(birthdate), gender), Customer.class);
         boolean isAdded = customerDetailsService.saveCustomer(customer);
         if (isAdded) {
-            Map<Object, Object> response = new HashMap<>();
-            response.put("username", customer.getUsername());
-            return "main";
+            return login(username, password, model);
         } else {
             throw new RuntimeException("Forbidden");
         }
