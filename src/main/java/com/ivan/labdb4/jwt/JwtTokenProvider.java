@@ -41,12 +41,10 @@ public class JwtTokenProvider {
     public String createToken(String username, String role) {
         Claims claims = Jwts.claims().setSubject(username);
         claims.put("role", role);
-        Date now = new Date();
         Date validity = java.sql.Date.valueOf(LocalDate.now().plusDays(expirationTimeInDays));
 
         return Jwts.builder()
                 .setClaims(claims)
-                .setIssuedAt(now)
                 .setExpiration(validity)
                 .signWith(SignatureAlgorithm.HS256, secretKey)
                 .compact();
