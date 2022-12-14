@@ -5,6 +5,8 @@ import com.ivan.labdb4.repository.HighlightAuthorRepository;
 import com.ivan.labdb4.repository.HighlightMetainfoRepository;
 import com.ivan.labdb4.repository.HighlightRepository;
 import com.ivan.labdb4.repository.MovieRepository;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -40,38 +42,15 @@ public class HighLightServiceImpl implements HighLightService {
     }
 
     @Override
-    public void saveHighlightMetainfo(MultipartFile file, Integer id) throws IOException {
-        if (highlightMetainfoRepository.findById(id).isPresent()) {
-            throw new RuntimeException("Video already exists!");
-        }
-
-        HighlightAuthor highlightAuthor = new HighlightAuthor();
-        highlightAuthor.setNickname("test");
-
-        highlightAuthor.setEmail("TestMail");
-        highlightAuthor.setUsername("TestLogin");
-        highlightAuthor.setPassword("TestPass");
-
-        highlightAuthor.setName("TestName");
-        highlightAuthor.setSurname("TestSurname");
-        highlightAuthor.setBirthdate(new Date());
-        highlightAuthor.setGender(Gender.MALE);
-        highlightAuthorRepository.save(highlightAuthor);
+    public void saveHighlightMetainfo(MultipartFile file, String videoName, String movieName) throws IOException {
 
 
-        Highlight highlight = new Highlight(highlightAuthor, "TestName");
-        highlightRepository.save(highlight);
+//        Highlight highlight = new Highlight(highlightAuthor, "TestName");
+//        highlightRepository.save(highlight);
 
-
-        Movie movie = new Movie();
-        movie.setName("Test");
-        movie.setGenre("TestGenre");
-        movieRepository.save(movie);
-
-
-        HighlightMetainfo highlightMetainfo = new HighlightMetainfo(highlight, movie, 10);
-        highlightMetainfo.setData(file.getBytes());
-        highlightMetainfoRepository.save(highlightMetainfo);
+//        HighlightMetainfo highlightMetainfo = new HighlightMetainfo(highlight, movie);
+//        highlightMetainfo.setData(file.getBytes());
+//        highlightMetainfoRepository.save(highlightMetainfo);
     }
 
     @Override

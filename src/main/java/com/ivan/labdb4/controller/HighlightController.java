@@ -24,9 +24,10 @@ public class HighlightController {
 
     @PostMapping()
     public ResponseEntity<String> saveHighLight(@RequestParam("file") MultipartFile file,
-                                                @RequestParam("id") Integer id) {
+                                                @RequestParam("video-name") String videoName,
+                                                @RequestParam("movie-name") String movieName) {
         try {
-            highLightService.saveHighlightMetainfo(file, id);
+            highLightService.saveHighlightMetainfo(file, videoName, movieName);
             return ResponseEntity.ok("Video saved");
         } catch (IOException e) {
             return ResponseEntity.badRequest().body("Some error");

@@ -11,7 +11,6 @@ public class HighlightMetainfo {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    private Integer duration;
     @OneToOne(targetEntity = Highlight.class, fetch = FetchType.EAGER, optional = false)
     @JoinColumn(name = "highlight_id", referencedColumnName = "id")
     private Highlight highlight;
@@ -23,9 +22,8 @@ public class HighlightMetainfo {
     @Lob
     private byte[] data;
 
-    public HighlightMetainfo(Highlight highlight, Movie movie, Integer duration) {
+    public HighlightMetainfo(Highlight highlight, Movie movie) {
         this.highlight = highlight;
         this.movie = movie;
-        this.duration = duration;
     }
 }

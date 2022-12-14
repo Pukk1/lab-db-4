@@ -95,7 +95,6 @@ CREATE TABLE highlight (
 
 CREATE TABLE highlight_metainfo (
                                     id serial PRIMARY KEY,
-                                    duration int NOT NULL,
                                     data oid NOT NULL,
                                     highlight_id int UNIQUE NOT NULL REFERENCES highlight ON DELETE CASCADE,
                                     movie_id int NOT NULL REFERENCES movie ON DELETE CASCADE
