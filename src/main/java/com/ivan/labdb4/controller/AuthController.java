@@ -2,6 +2,7 @@ package com.ivan.labdb4.controller;
 
 import com.ivan.labdb4.jwt.JwtTokenProvider;
 import com.ivan.labdb4.model.Customer;
+import com.ivan.labdb4.model.Gender;
 import com.ivan.labdb4.model.dto.CustomerDTO;
 import com.ivan.labdb4.service.CustomerDetailsServiceImpl;
 import org.modelmapper.ModelMapper;
@@ -10,12 +11,18 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.AuthenticationException;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.HashMap;
 import java.util.Map;
 
-@RestController
+@Controller
 @RequestMapping("/auth")
 public class AuthController {
 
@@ -25,9 +32,9 @@ public class AuthController {
     private final ModelMapper mapper;
 
     public AuthController(AuthenticationManager authenticationManager,
-                           JwtTokenProvider jwtTokenProvider,
-                           CustomerDetailsServiceImpl customerDetailsService,
-                           ModelMapper mapper) {
+                          JwtTokenProvider jwtTokenProvider,
+                          CustomerDetailsServiceImpl customerDetailsService,
+                          ModelMapper mapper) {
         this.authenticationManager = authenticationManager;
         this.jwtTokenProvider = jwtTokenProvider;
         this.customerDetailsService = customerDetailsService;
@@ -35,7 +42,7 @@ public class AuthController {
     }
 
     @PostMapping("/login")
-    public ResponseEntity<?> login(@RequestParam String username, @RequestParam String password) {
+    public String login(@RequestParam String username, @RequestParam String password, Model model) {
         try {
             authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(username, password));
             Customer customer = customerDetailsService.findByUsername(username);
@@ -43,22 +50,31 @@ public class AuthController {
             Map<Object, Object> response = new HashMap<>();
             response.put("username", username);
             response.put("token", token);
-            return ResponseEntity.ok(response);
+            return "main";
         } catch (AuthenticationException e) {
-            return new ResponseEntity<>("Invalid email/password combination", HttpStatus.FORBIDDEN);
+            return "Invalid email/password combination";
         }
     }
 
     @PostMapping("/register")
-    public ResponseEntity<?> register(@RequestBody CustomerDTO request) {
-        Customer customer = mapper.map(request, Customer.class);
+    public String register(
+            @RequestParam String email,
+            @RequestParam String username,
+            @RequestParam String password,
+            @RequestParam String name,
+            @RequestParam String surname,
+            @RequestParam String birthdate,
+            @RequestParam Gender gender,
+            Model model
+    ) throws ParseException {
+        Customer customer = mapper.map(new CustomerDTO(email, username, password, name, surname, new SimpleDateFormat("yyyy-MM-dd").parse(birthdate), gender), Customer.class);
         boolean isAdded = customerDetailsService.saveCustomer(customer);
         if (isAdded) {
             Map<Object, Object> response = new HashMap<>();
             response.put("username", customer.getUsername());
-            return ResponseEntity.ok(response);
+            return "main";
         } else {
-            return new ResponseEntity<>(HttpStatus.FORBIDDEN);
+            throw new RuntimeException("Forbidden");
         }
     }
 }

@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Register</title>
+</head>
+<body>
+<form action="/auth/register" method="post">
+    <input type="email" name="email" placeholder="email">
+    <input type="text" name="username" placeholder="username">
+    <input type="text" name="password" placeholder="password">
+    <input type="text" name="name" placeholder="name">
+    <input type="text" name="surname" placeholder="surname">
+    <input type="date" name="birthdate" placeholder="birthdate">
+    <input id="register-user-radio1" type="radio" name="gender" value="MALE"/>
+    <label for="register-user-radio1">Male</label>
+    <input id="register-user-radio2" type="radio" name="gender" value="FEMALE"/>
+    <label for="register-user-radio2">Female</label>
+    <button id="register-button">Зарегистрироваться</button>
+</form>
+</body>
+</html>

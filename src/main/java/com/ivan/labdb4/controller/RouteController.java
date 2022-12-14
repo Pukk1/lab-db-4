@@ -22,6 +22,11 @@ public class RouteController {
         return "login";
     }
 
+    @GetMapping("/auth/register")
+    public String getRegisterPage() {
+        return "register";
+    }
+
     @PostMapping("/main")
     public String postMainPage(
             @RequestParam("uid") Integer uid,
