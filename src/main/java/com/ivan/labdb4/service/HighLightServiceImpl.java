@@ -5,8 +5,6 @@ import com.ivan.labdb4.repository.HighlightAuthorRepository;
 import com.ivan.labdb4.repository.HighlightMetainfoRepository;
 import com.ivan.labdb4.repository.HighlightRepository;
 import com.ivan.labdb4.repository.MovieRepository;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -18,16 +16,13 @@ import java.util.List;
 public class HighLightServiceImpl implements HighLightService {
 
     private final HighlightMetainfoRepository highlightMetainfoRepository;
-    private final HighlightAuthorRepository highlightAuthorRepository;
     private final HighlightRepository highlightRepository;
     private final MovieRepository movieRepository;
 
     public HighLightServiceImpl(HighlightMetainfoRepository highlightMetainfoRepository,
-                                HighlightAuthorRepository highlightAuthorRepository,
                                 HighlightRepository highlightRepository,
                                 MovieRepository movieRepository) {
         this.highlightMetainfoRepository = highlightMetainfoRepository;
-        this.highlightAuthorRepository = highlightAuthorRepository;
         this.highlightRepository = highlightRepository;
         this.movieRepository = movieRepository;
     }
@@ -42,15 +37,15 @@ public class HighLightServiceImpl implements HighLightService {
     }
 
     @Override
-    public void saveHighlightMetainfo(MultipartFile file, String videoName, String movieName) throws IOException {
+    public void saveHighlightMetainfo(MultipartFile file, String videoName, String movieName, HighlightAuthor highlightAuthor) throws IOException {
+        Highlight highlight = new Highlight(highlightAuthor, videoName);
+        highlightRepository.save(highlight);
 
+        Movie movie = movieRepository.findByName(movieName);
 
-//        Highlight highlight = new Highlight(highlightAuthor, "TestName");
-//        highlightRepository.save(highlight);
-
-//        HighlightMetainfo highlightMetainfo = new HighlightMetainfo(highlight, movie);
-//        highlightMetainfo.setData(file.getBytes());
-//        highlightMetainfoRepository.save(highlightMetainfo);
+        HighlightMetainfo highlightMetainfo = new HighlightMetainfo(highlight, movie);
+        highlightMetainfo.setData(file.getBytes());
+        highlightMetainfoRepository.save(highlightMetainfo);
     }
 
     @Override
