@@ -12,10 +12,15 @@ import java.util.Set;
 @Data
 @NoArgsConstructor
 public class HighlightAuthor extends Customer {
+    private String nickname;
+
     public HighlightAuthor(String email, String username, String password, CustomerRole role, CustomerStatus status, Set<HighlightMetainfo> liked, Set<HighlightAuthor> subscriptions, String nickname) {
         super(email, username, password, role, status, liked, subscriptions);
         this.nickname = nickname;
     }
 
-    private String nickname;
+    public HighlightAuthor(Customer customer, String nickname) {
+        super(customer.getEmail(), customer.getUsername(), customer.getPassword(), customer.getRole(), customer.getStatus(), customer.getLiked(), customer.getSubscriptions());
+        this.nickname = nickname;
+    }
 }

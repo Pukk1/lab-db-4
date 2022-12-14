@@ -9,6 +9,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class HighLightServiceImpl implements HighLightService {
@@ -47,14 +48,14 @@ public class HighLightServiceImpl implements HighLightService {
     }
 
     @Override
-    public List<Integer> getAllHighLightsOfAuthor(HighlightAuthor highlightAuthor) {
-        var ids =  highlightMetainfoRepository.getAllHighLightsIds();
-//        ids.forEach();
-        return null;
+    public List<String> getAllHighLightsNames() {
+        var highLightsIds = highlightMetainfoRepository.getHighLightId();
+        var highLightsNames = highLightsIds.stream().map(highlightRepository::getNameById).collect(Collectors.toList());
+        return highLightsNames;
     }
 
     @Override
     public List<Integer> getAllHighLightsIds() {
-        return highlightMetainfoRepository.getAllHighLightsIds();
+        return highlightMetainfoRepository.getAllHighLightsMetaInfoIds();
     }
 }

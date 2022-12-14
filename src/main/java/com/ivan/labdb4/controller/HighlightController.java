@@ -57,6 +57,11 @@ public class HighlightController {
                 .body(new ByteArrayResource(highLightService.getHighlightMetainfo(id).getData()));
     }
 
+    @GetMapping("/all-names")
+    public ResponseEntity<List<String>> getAllHighLightsNames() {
+        return ResponseEntity.ok(highLightService.getAllHighLightsNames());
+    }
+
     @GetMapping("/all")
     public ResponseEntity<List<Integer>> getAllHighLightsIds() {
         return ResponseEntity.ok(highLightService.getAllHighLightsIds());

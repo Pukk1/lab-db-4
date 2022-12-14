@@ -3,7 +3,9 @@ package com.ivan.labdb4.controller;
 import com.ivan.labdb4.jwt.JwtTokenProvider;
 import com.ivan.labdb4.model.Customer;
 import com.ivan.labdb4.model.Gender;
+import com.ivan.labdb4.model.HighlightAuthor;
 import com.ivan.labdb4.model.dto.CustomerDTO;
+import com.ivan.labdb4.repository.HighlightAuthorRepository;
 import com.ivan.labdb4.service.CustomerDetailsServiceImpl;
 import org.modelmapper.ModelMapper;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -25,15 +27,18 @@ public class AuthController {
     private final JwtTokenProvider jwtTokenProvider;
     private final CustomerDetailsServiceImpl customerDetailsService;
     private final ModelMapper mapper;
+    private final HighlightAuthorRepository highlightAuthorRepository;
 
     public AuthController(AuthenticationManager authenticationManager,
                           JwtTokenProvider jwtTokenProvider,
                           CustomerDetailsServiceImpl customerDetailsService,
-                          ModelMapper mapper) {
+                          ModelMapper mapper,
+                          HighlightAuthorRepository highlightAuthorRepository) {
         this.authenticationManager = authenticationManager;
         this.jwtTokenProvider = jwtTokenProvider;
         this.customerDetailsService = customerDetailsService;
         this.mapper = mapper;
+        this.highlightAuthorRepository = highlightAuthorRepository;
     }
 
     @PostMapping("/login")
@@ -62,6 +67,10 @@ public class AuthController {
         Customer customer = mapper.map(new CustomerDTO(email, username, password, name, surname, new SimpleDateFormat("yyyy-MM-dd").parse(birthdate), gender), Customer.class);
         boolean isAdded = customerDetailsService.saveCustomer(customer);
         if (isAdded) {
+            if (nickname != null && !nickname.isBlank()) {
+                HighlightAuthor highlightAuthor = new HighlightAuthor(customer, nickname);
+                highlightAuthorRepository.save(highlightAuthor);
+            }
             return login(username, password);
         } else {
             throw new RuntimeException("Forbidden");
