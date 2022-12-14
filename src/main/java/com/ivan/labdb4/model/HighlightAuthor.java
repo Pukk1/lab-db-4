@@ -19,8 +19,8 @@ public class HighlightAuthor extends Customer {
         this.nickname = nickname;
     }
 
-    public HighlightAuthor(Customer customer, String nickname) {
-        super(customer.getEmail(), customer.getUsername(), customer.getPassword(), customer.getRole(), customer.getStatus(), customer.getLiked(), customer.getSubscriptions());
+    public HighlightAuthor(Integer id, String nickname) {
+        this.setId(id);
         this.nickname = nickname;
     }
 }

@@ -57,9 +57,10 @@ public class HighlightController {
                 .body(new ByteArrayResource(highLightService.getHighlightMetainfo(id).getData()));
     }
 
-    @GetMapping("/all-names")
-    public ResponseEntity<List<String>> getAllHighLightsNames() {
-        return ResponseEntity.ok(highLightService.getAllHighLightsNames());
+    @GetMapping("/manage/all")
+    public ResponseEntity<List<Integer>> getAllHighLightsNames(@RequestParam("token") String token) {
+        HighlightAuthor highlightAuthor = highlightAuthorRepository.findByUsername(jwtTokenProvider.getUsername(token));
+        return ResponseEntity.ok(highLightService.getAllHighLightsIdsOfAuthor(highlightAuthor.getId()));
     }
 
     @GetMapping("/all")

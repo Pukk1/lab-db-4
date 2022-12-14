@@ -1,6 +1,7 @@
 package com.ivan.labdb4.service;
 
 import com.ivan.labdb4.model.*;
+import com.ivan.labdb4.repository.HighlightAuthorRepository;
 import com.ivan.labdb4.repository.HighlightMetainfoRepository;
 import com.ivan.labdb4.repository.HighlightRepository;
 import com.ivan.labdb4.repository.MovieRepository;
@@ -17,13 +18,16 @@ public class HighLightServiceImpl implements HighLightService {
     private final HighlightMetainfoRepository highlightMetainfoRepository;
     private final HighlightRepository highlightRepository;
     private final MovieRepository movieRepository;
+    private final HighlightAuthorRepository highlightAuthorRepository;
 
     public HighLightServiceImpl(HighlightMetainfoRepository highlightMetainfoRepository,
                                 HighlightRepository highlightRepository,
-                                MovieRepository movieRepository) {
+                                MovieRepository movieRepository,
+                                HighlightAuthorRepository highlightAuthorRepository) {
         this.highlightMetainfoRepository = highlightMetainfoRepository;
         this.highlightRepository = highlightRepository;
         this.movieRepository = movieRepository;
+        this.highlightAuthorRepository = highlightAuthorRepository;
     }
 
     @Override
@@ -48,10 +52,8 @@ public class HighLightServiceImpl implements HighLightService {
     }
 
     @Override
-    public List<String> getAllHighLightsNames() {
-        var highLightsIds = highlightMetainfoRepository.getHighLightId();
-        var highLightsNames = highLightsIds.stream().map(highlightRepository::getNameById).collect(Collectors.toList());
-        return highLightsNames;
+    public List<Integer> getAllHighLightsIdsOfAuthor(Integer highLightAuthorId) {
+        return highlightMetainfoRepository.getAllHighLightsIdsOfAuthor(highLightAuthorId);
     }
 
     @Override
