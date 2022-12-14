@@ -7,6 +7,9 @@
     <link rel="stylesheet" href="../static/css/styles.css">
 </head>
 <body>
+<form action="/auth/login" method="get">
+    <button>Разлогиниться</button>
+</form>
 <input id="token-input" type="hidden" name="token" th:value="${token}">
     <main>
         <div id="your-videos">
