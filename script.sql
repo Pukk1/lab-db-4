@@ -90,7 +90,7 @@ CREATE TABLE highlight_author (
 CREATE TABLE highlight (
                            id serial PRIMARY KEY,
                            name varchar(50) NOT NULL,
-                           author_id int UNIQUE NOT NULL REFERENCES highlight_author ON DELETE CASCADE
+                           author_id int NOT NULL REFERENCES highlight_author ON DELETE CASCADE
 );
 
 CREATE TABLE highlight_metainfo (
