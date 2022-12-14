@@ -38,14 +38,12 @@ public class AuthController {
     }
 
     @PostMapping("/login")
-    public String login(@RequestParam String username, @RequestParam String password, Model model) {
+    public String login(@RequestParam String username, @RequestParam String password) {
         try {
             authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(username, password));
             Customer customer = customerDetailsService.findByUsername(username);
             String token = jwtTokenProvider.createToken(customer.getUsername(), customer.getRole().name());
-            model.addAttribute("username", username);
-            model.addAttribute("token", token);
-            return "main";
+            return "redirect:/main?token=" + token+"&username="+username;
         } catch (AuthenticationException e) {
             return "Invalid email/password combination";
         }
@@ -65,7 +63,7 @@ public class AuthController {
         Customer customer = mapper.map(new CustomerDTO(email, username, password, name, surname, new SimpleDateFormat("yyyy-MM-dd").parse(birthdate), gender), Customer.class);
         boolean isAdded = customerDetailsService.saveCustomer(customer);
         if (isAdded) {
-            return login(username, password, model);
+            return login(username, password);
         } else {
             throw new RuntimeException("Forbidden");
         }

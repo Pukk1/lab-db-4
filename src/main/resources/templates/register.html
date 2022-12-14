@@ -12,11 +12,15 @@
     <input type="text" name="name" placeholder="name">
     <input type="text" name="surname" placeholder="surname">
     <input type="date" name="birthdate" placeholder="birthdate">
-    <input id="register-user-radio1" type="radio" name="gender" value="MALE"/>
+    <input id="register-user-radio1" type="radio" name="gender" value="MALE" required/>
     <label for="register-user-radio1">Male</label>
-    <input id="register-user-radio2" type="radio" name="gender" value="FEMALE"/>
+    <input id="register-user-radio2" type="radio" name="gender" value="FEMALE" required/>
     <label for="register-user-radio2">Female</label>
+    <input id="nickname-checkbox" type="checkbox" onclick="checkAuthor()">
+    <label for="nickname-checkbox">Стать автором</label>
+    <input id="nickname-text" type="hidden" name="nickname" placeholder="nickname">
     <button id="register-button">Зарегистрироваться</button>
 </form>
 </body>
+<script src="/js/register.js"/>
 </html>

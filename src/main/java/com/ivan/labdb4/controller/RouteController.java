@@ -3,7 +3,9 @@ package com.ivan.labdb4.controller;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 @RequestMapping
@@ -27,13 +29,13 @@ public class RouteController {
         return "register";
     }
 
-    @PostMapping("/main")
+    @GetMapping("/main")
     public String postMainPage(
-            @RequestParam("username") Integer uid,
+            @RequestParam("username") String username,
             @RequestParam("token") String token,
             Model model
     ) {
-        model.addAttribute("uid", uid);
+        model.addAttribute("username", username);
         model.addAttribute("token", token);
         return "main";
     }
