@@ -10,7 +10,6 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -43,7 +42,7 @@ public class AuthController {
             authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(username, password));
             Customer customer = customerDetailsService.findByUsername(username);
             String token = jwtTokenProvider.createToken(customer.getUsername(), customer.getRole().name());
-            return "redirect:/main?token=" + token;
+            return "redirect:/main?token=" + token + "&username=" + username;
         } catch (AuthenticationException e) {
             return "Invalid email/password combination";
         }
@@ -58,7 +57,7 @@ public class AuthController {
             @RequestParam String surname,
             @RequestParam String birthdate,
             @RequestParam Gender gender,
-            Model model
+            @RequestParam(required = false) String nickname
     ) throws ParseException {
         Customer customer = mapper.map(new CustomerDTO(email, username, password, name, surname, new SimpleDateFormat("yyyy-MM-dd").parse(birthdate), gender), Customer.class);
         boolean isAdded = customerDetailsService.saveCustomer(customer);

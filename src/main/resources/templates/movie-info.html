@@ -4,22 +4,25 @@
     <meta charset="UTF-8">
     <title>Movie-info</title>
 </head>
-<form action="manage-highlights.html" method="post">
-    <input type="hidden" name="uid" th:value="${uid}">
-    <input type="hidden" name="uid" th:value="${token}">
+<form action="/main" method="get">
+    <input type="hidden" name="token" th:value="${token}">
     <button>На главную</button>
 </form>
-<form action="/logout" method="get">
+<form action="/auth/login" method="get">
     <button>Разлогиниться</button>
 </form>
 <body>
 <p><strong>
     <th:block th:text="${movieInfo.movie.name}"/>
 </strong></p>
-<form>
+<form action="/like-video" method="post">
+    <input type="hidden" name="video-info-id" th:value="${}">
+    <input type="hidden" name="token">
     <button>Нравится</button>
 </form>
-<form>
+<form action="/subscribe" method="post">
+    <input type="hidden" name="video-info-id">
+    <input type="hidden" name="token">
     <button>Подписаться</button>
 </form>
 <table border="1" style="border-collapse: collapse; width: 68.1999%; height: 147px;" height="141">

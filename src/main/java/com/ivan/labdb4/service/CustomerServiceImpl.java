@@ -1,6 +1,5 @@
 package com.ivan.labdb4.service;
 
-import com.ivan.labdb4.model.Customer;
 import com.ivan.labdb4.model.HighlightAuthor;
 import com.ivan.labdb4.model.HighlightMetainfo;
 import com.ivan.labdb4.repository.CustomerRepository;
@@ -16,14 +15,16 @@ public class CustomerServiceImpl implements CustomerService {
 
     @Override
     @Transactional
-    public void likeVideo(Customer customer, HighlightMetainfo videoInfo) {
+    public void likeVideo(String customerName, HighlightMetainfo videoInfo) {
+        var customer = repository.findByUsername(customerName).orElseThrow(RuntimeException::new);
         customer.getLiked().add(videoInfo);
         repository.save(customer);
     }
 
     @Override
     @Transactional
-    public void subscribe(Customer customer, HighlightAuthor author) {
+    public void subscribe(String customerName, HighlightAuthor author) {
+        var customer = repository.findByUsername(customerName).orElseThrow(RuntimeException::new);
         customer.getSubscriptions().add(author);
         repository.save(customer);
     }

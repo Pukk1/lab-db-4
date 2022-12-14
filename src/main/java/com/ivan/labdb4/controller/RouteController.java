@@ -30,7 +30,7 @@ public class RouteController {
     }
 
     @GetMapping("/main")
-    public String postMainPage(
+    public String getMainPage(
             @RequestParam("token") String token,
             Model model
     ) {
