@@ -1,0 +1,23 @@
+server:
+  port: 8080
+  jpa:
+    hibernate:
+      ddl-auto: validate
+  tomcat:
+    max-swallow-size: 1
+spring:
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: ${DB_URL:jdbc:postgresql://localhost:5432/studs}
+    username: ${DB_USER}
+    password: ${DB_PASS}
+  servlet:
+    multipart:
+      max-file-size: 1000MB
+logging:
+  level:
+    web: debug
+jwt:
+  header: token
+  secret: mobest1an
+  expiration: 3
