@@ -12,8 +12,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 @RequiredArgsConstructor
 public class RouteController {
 
-    private final AuthController authController;
-
     @GetMapping
     public String getRootPage() {
         return "redirect:/auth/login";

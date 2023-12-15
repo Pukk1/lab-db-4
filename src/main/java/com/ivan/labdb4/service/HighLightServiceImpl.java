@@ -1,7 +1,9 @@
 package com.ivan.labdb4.service;
 
-import com.ivan.labdb4.model.*;
-import com.ivan.labdb4.repository.HighlightAuthorRepository;
+import com.ivan.labdb4.model.Highlight;
+import com.ivan.labdb4.model.HighlightAuthor;
+import com.ivan.labdb4.model.HighlightMetainfo;
+import com.ivan.labdb4.model.Movie;
 import com.ivan.labdb4.repository.HighlightMetainfoRepository;
 import com.ivan.labdb4.repository.HighlightRepository;
 import com.ivan.labdb4.repository.MovieRepository;
@@ -10,7 +12,6 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 public class HighLightServiceImpl implements HighLightService {
@@ -18,21 +19,18 @@ public class HighLightServiceImpl implements HighLightService {
     private final HighlightMetainfoRepository highlightMetainfoRepository;
     private final HighlightRepository highlightRepository;
     private final MovieRepository movieRepository;
-    private final HighlightAuthorRepository highlightAuthorRepository;
 
     public HighLightServiceImpl(HighlightMetainfoRepository highlightMetainfoRepository,
                                 HighlightRepository highlightRepository,
-                                MovieRepository movieRepository,
-                                HighlightAuthorRepository highlightAuthorRepository) {
+                                MovieRepository movieRepository) {
         this.highlightMetainfoRepository = highlightMetainfoRepository;
         this.highlightRepository = highlightRepository;
         this.movieRepository = movieRepository;
-        this.highlightAuthorRepository = highlightAuthorRepository;
     }
 
     @Override
     public HighlightMetainfo getHighlightMetainfo(Integer id) {
-        if (!highlightMetainfoRepository.findById(id).isPresent()) {
+        if (highlightMetainfoRepository.findById(id).isEmpty()) {
             throw new RuntimeException("Video not found!");
         }
 

@@ -3,7 +3,6 @@ package com.ivan.labdb4.controller;
 import com.ivan.labdb4.jwt.JwtTokenProvider;
 import com.ivan.labdb4.model.Customer;
 import com.ivan.labdb4.model.Gender;
-import com.ivan.labdb4.model.HighlightAuthor;
 import com.ivan.labdb4.model.dto.CustomerDTO;
 import com.ivan.labdb4.model.security.CustomerRole;
 import com.ivan.labdb4.repository.HighlightAuthorRepository;

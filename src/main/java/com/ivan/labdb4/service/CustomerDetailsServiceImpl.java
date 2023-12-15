@@ -1,12 +1,10 @@
 package com.ivan.labdb4.service;
 
 import com.ivan.labdb4.model.Customer;
-import com.ivan.labdb4.model.HighlightAuthor;
 import com.ivan.labdb4.model.security.CustomerDetails;
 import com.ivan.labdb4.model.security.CustomerRole;
 import com.ivan.labdb4.model.security.CustomerStatus;
 import com.ivan.labdb4.repository.CustomerRepository;
-import com.ivan.labdb4.repository.HighlightAuthorRepository;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -17,11 +15,9 @@ import org.springframework.stereotype.Service;
 public class CustomerDetailsServiceImpl implements UserDetailsService {
 
     private final CustomerRepository customerRepository;
-    private final HighlightAuthorRepository authorRepository;
 
-    public CustomerDetailsServiceImpl(CustomerRepository customerRepository, HighlightAuthorRepository authorRepository) {
+    public CustomerDetailsServiceImpl(CustomerRepository customerRepository) {
         this.customerRepository = customerRepository;
-        this.authorRepository = authorRepository;
     }
 
     @Override

@@ -1,9 +1,8 @@
 package com.ivan.labdb4.model;
 
-import javax.persistence.*;
 import lombok.Data;
 
-import java.util.List;
+import javax.persistence.*;
 
 @Entity
 @Data
